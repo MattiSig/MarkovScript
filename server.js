@@ -53,12 +53,12 @@ request(url, function(error, response, html){
                 var temp2 = data.slice(j, j+2)
                 if(temp2 == "\n\n"){
                     var lines = data.slice(i+4,j);
-                    var fixedLines = lines.replace(/\n\t\t|\t/g,'');
+                    var fixedLines = lines.replace(/\n\t\t|\t/g,' ');
                     var fixedAgain = fixedLines.replace(/\"/g,'');
                     json.lines = json.lines + fixedAgain + "# ";
                     running = false;
                 }
-                
+
                 j++
                 if(j >125040){
                     running = false;
