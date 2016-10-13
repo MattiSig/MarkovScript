@@ -17,7 +17,7 @@ function MarkovChain(stringToProcess){
 		var lastChar = string.substr(string.length-1);
 		var firstChar = string.substr(0,1);
 
-		//SPECIAL CASE
+		//SPECIAL CASE - parenthesis
 		//if first character is "(" look for the word that closes the 
 		// ")" and add that sentance as one word
 		if(isInParanthesis){
@@ -39,10 +39,10 @@ function MarkovChain(stringToProcess){
 			continue;
 		}
 
-
 		//if last char is weird, handle with care
 		if(lastChar.match(weirdChar)){
 
+			//SPECIAL CASE - ...
 			//if we are dealing with '...', just add it
 			if(string.substr(string.length-3) === '...'){
 				processedStringArray.push(string);
@@ -89,7 +89,7 @@ function MarkovChain(stringToProcess){
 
 	while(run){
 		if(firstRun){
-			var options = markovDictionary['.'];
+			var options = markovDictionary['#'];
 			firstRun = false;
 		}else{
 			var options = markovDictionary[currentWord];
@@ -98,7 +98,9 @@ function MarkovChain(stringToProcess){
 		nextWord = options[Math.floor(Math.random()*options.length)];
 		console.log(nextWord);
 
+		//If we have a weirdChar we dont add a space before it
 		if(nextWord.match(weirdChar) && nextWord.length === 1){
+			//# ends the sentence
 			if(nextWord === '#'){
 				run = false;
 				break;
@@ -107,6 +109,10 @@ function MarkovChain(stringToProcess){
 
 			markovSentence = markovSentence + nextWord
 		}else{
+
+			if(currentWord === '...'){
+				markovSentence = markovSentence + nextWord;
+			}
 			markovSentence = markovSentence + ' ' + nextWord;
 		}
 		currentWord = nextWord;
