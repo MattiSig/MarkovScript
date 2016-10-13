@@ -9,17 +9,26 @@ var Markov = require("./markovChain.js");
 var CHARACTER_PREFIX = "\t\t\t\t";
 var LINE_PREFIX = "\n\n\t\t";
 
-app.get('/scrape', function(req, res){
 
+app.get('/', function(req, res, next){
+    res.sendFile(__dirname + '/index.html');
+    next();
+});
+
+app.use(function(req, res, next) {                      //404 response handler
+    console.log("danni kann ekki .append")
+    //$( "div" ).append( "<p>Danni </p>" ); 
+    //next();
+});
+
+app.get('/scrape', function(req,res){
     var url = 'http://www.imsdb.com/scripts/Clerks.html';
     var sentance;
     var json;
 
     request(url, function(error, response, html){
-        
         if(!error){
             var $ = cheerio.load(html);
-
             var character, sceene, lines;
             json = { character : [], sceene : '', lines : ''};
 
@@ -52,6 +61,7 @@ app.get('/scrape', function(req, res){
                 var next = data.slice(i+4,i+5);
 
                 if(temp == LINE_PREFIX && !(next == "\t")){
+
                     var running= true;
                     var j = i+3;
                     
@@ -123,20 +133,14 @@ app.get('/scrape', function(req, res){
             console.log('noice');
             res.sendFile('script.txt', {root: __dirname});
         })
-        // To write to the system we will use the built in 'fs' library.
-        // In this example we will pass 3 parameters to the writeFile function
-        // Parameter 1 :  output.json - this is what the created filename will be called
-        // Parameter 2 :  JSON.stringify(json, null, 4) - the data to write, here we do an extra step by calling JSON.stringify to make our JSON easier to read
-        // Parameter 3 :  callback function - a callback function to let us know the status of our function
 
-        // fs.writeFile('output.json', JSON.stringify(json, null, 4), function(err){
 
-        //     console.log('File successfully written! - Check your project directory for the output.json file');
+        // Finally, we'll just write out our json fie to output.json
+        fs.writeFile('output.json', JSON.stringify(json, null, 4), function(err){
 
-        // });
+            console.log('File successfully written! - Check your project directory for the output.json file');
 
-        // Finally, we'll just send out a message to the browser reminding you that this app does not have a UI.
-
+        });
     });
 });
 
