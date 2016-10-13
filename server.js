@@ -53,9 +53,12 @@ request(url, function(error, response, html){
                 var temp2 = data.slice(j, j+2)
                 if(temp2 == "\n\n"){
                     var lines = data.slice(i+4,j);
-                    var fixedLines = lines.replace(/\n\t\t|\t/g,' ');
-                    var fixedAgain = fixedLines.replace(/\"/g,'');
-                    json.lines = json.lines + fixedAgain + "# ";
+                    lines = lines.replace(/\n\t\t|\t/g,' ');
+                    lines = lines.replace(/\"/g,'');
+                    lines = lines.replace(/\\.\\.\\.|\\.\\.\\.\\./g," ... ");
+                    lines = lines.replace(/  |   /g," ");
+
+                    json.lines = json.lines + lines + "# ";
                     running = false;
                 }
 
