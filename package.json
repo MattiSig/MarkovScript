@@ -1,0 +1,13 @@
+{
+  "name": "j-script-scrape",
+  "version": "0.0.1",
+  "description": "Scrape le web.",
+  "main": "server.js",
+  "author": "Matthias",
+  "dependencies": {
+    "cheerio": "latest",
+    "express": "latest",
+    "nodemon": "^1.11.0",
+    "request": "latest"
+  }
+}
