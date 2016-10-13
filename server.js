@@ -55,10 +55,10 @@ request(url, function(error, response, html){
                     var lines = data.slice(i+4,j);
                     lines = lines.replace(/\n\t\t|\t/g,' ');
                     lines = lines.replace(/\"/g,'');
-                    lines = lines.replace(/...|..../g," ... ");
+                    lines = lines.replace(/\\.\\.\\.|\\.\\.\\.\\./g," ... ");
                     lines = lines.replace(/  |   /g," ");
 
-                    json.lines = json.lines + fixedAgain + "# ";
+                    json.lines = json.lines + lines + "# ";
                     running = false;
                 }
 
