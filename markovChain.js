@@ -2,8 +2,11 @@
 function MarkovChain(stringToProcess){
 
 	var stringArray = stringToProcess.split(' ');
-	var weirdChar = /[().,:;?!#]/g;
+	var weirdChar = /[.,:;?!#]/g;
 	var processedStringArray = [];
+
+	var paranthesisString = '';
+	var isInParanthesis = false;
 
 	console.log('processing strings...');
 
@@ -12,9 +15,41 @@ function MarkovChain(stringToProcess){
 		var string = stringArray[i];
 		string = string.trim();
 		var lastChar = string.substr(string.length-1);
+		var firstChar = string.substr(0,1);
 
-		//if last char is weird, split the word in two
+		//SPECIAL CASE
+		//if first character is "(" look for the word that closes the 
+		// ")" and add that sentance as one word
+		if(isInParanthesis){
+			
+			if(lastChar === ')'){
+				paranthesisString += string;
+				processedStringArray.push(paranthesisString);
+				paranthesisString = '';
+				isInParanthesis = false;
+				continue;
+			}
+			paranthesisString += string + ' ';
+			continue;
+		}
+
+		if(firstChar === '('){
+			isInParanthesis = true
+			paranthesisString += string + ' ';
+			continue;
+		}
+
+
+		//if last char is weird, handle with care
 		if(lastChar.match(weirdChar)){
+
+			//if we are dealing with '...', just add it
+			if(string.substr(string.length-3) === '...'){
+				processedStringArray.push(string);
+				continue;
+			}
+
+			//split the word in two
 			var firstPart = string.substring(0,string.length-1);
 			var weirdPart = lastChar;
 			processedStringArray.push(firstPart);
