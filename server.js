@@ -55,7 +55,7 @@ request(url, function(error, response, html){
                     var lines = data.slice(i+4,j);
                     var fixedLines = lines.replace(/\n\t\t|\t/g,'');
                     var fixedAgain = fixedLines.replace(/\"/g,'');
-                    json.lines = json.lines + fixedLines + "# ";
+                    json.lines = json.lines + fixedAgain + "# ";
                     running = false;
                 }
                 
