@@ -2,7 +2,7 @@
 function MarkovChain(stringToProcess){
 
 	var stringArray = stringToProcess.split(' ');
-	var weirdChar = /[.,:;?!#]/g;
+	var weirdChar = /[().,:;?!#]/g;
 	var processedStringArray = [];
 
 	console.log('processing strings...');
@@ -63,12 +63,14 @@ function MarkovChain(stringToProcess){
 		nextWord = options[Math.floor(Math.random()*options.length)];
 		console.log(nextWord);
 
-		if(markovSentence === '' || nextWord[nextWord.length-1].match(weirdChar)){
-			markovSentence = markovSentence + nextWord;
-			//console.log(markovSentence);
+		if(nextWord.match(weirdChar) && nextWord.length === 1){
 			if(nextWord === '#'){
 				run = false;
+				break;
 			}
+			console.log('sup:', nextWord);
+
+			markovSentence = markovSentence + nextWord
 		}else{
 			markovSentence = markovSentence + ' ' + nextWord;
 		}
