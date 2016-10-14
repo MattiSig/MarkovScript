@@ -5,21 +5,24 @@ var cheerio = require('cheerio');
 var app     = express();
 var Markov = require("./markovChain.js");
 
+
 //define prefix for different units
 var CHARACTER_PREFIX = "\t\t\t\t";
 var LINE_PREFIX = "\n\n\t\t";
 
-
-app.get('/', function(req, res, next){
+//work in progress
+/*app.get('/', function(req, res, next){  
     res.sendFile(__dirname + '/index.html');
     next();
 });
 
-app.use(function(req, res, next) {                      //404 response handler
+app.use(function(req, res, next) {
     console.log("danni kann ekki .append")
-    //$( "div" ).append( "<p>Danni </p>" ); 
-    //next();
-});
+    var $ = cheerio.load('<div>...</div>');
+
+    $('div').append('<li class="plum">Plum</li>')
+    $.html();
+});*/
 
 app.get('/scrape', function(req,res){
     var url = 'http://www.imsdb.com/scripts/Clerks.html';
@@ -71,7 +74,7 @@ app.get('/scrape', function(req,res){
                             var lines = data.slice(i+4,j);
                             lines = lines.replace(/\n\t\t|\t/g,' ');
                             lines = lines.replace(/\"/g,'');
-                            lines = lines.replace(/\\.\\.\\.|\\.\\.\\.\\./g," ... ");
+                            lines = lines.replace(/\.\.\.|\.\.\.\./g," ... ");
                             lines = lines.replace(/  |   /g," ");
 
                             json.lines = json.lines + lines + "# ";

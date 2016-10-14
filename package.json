@@ -8,6 +8,7 @@
     "cheerio": "latest",
     "express": "latest",
     "nodemon": "^1.11.0",
-    "request": "latest"
+    "request": "latest",
+    "jquery": "latest"
   }
 }

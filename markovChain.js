@@ -111,7 +111,7 @@ function MarkovChain(stringToProcess){
 		}else{
 
 			if(currentWord === '...'){
-				markovSentence = markovSentence + nextWord;
+				markovSentence = markovSentence + ' ' + nextWord;
 			}
 			markovSentence = markovSentence + ' ' + nextWord;
 		}
