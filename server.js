@@ -10,16 +10,16 @@ var CHARACTER_PREFIX = "\t\t\t\t";
 var LINE_PREFIX = "\n\n\t\t";
 
 
-app.get('/', function(req, res, next){
-    res.sendFile(__dirname + '/index.html');
-    next();
-});
+// app.get('/', function(req, res, next){
+//     res.sendFile(__dirname + '/index.html');
+//     next();
+// });
 
-app.use(function(req, res, next) {                      //404 response handler
-    console.log("danni kann ekki .append")
-    //$( "div" ).append( "<p>Danni </p>" ); 
-    //next();
-});
+// app.use(function(req, res, next) {                      //404 response handler
+//     console.log("danni kann ekki .append")
+//     //$( "div" ).append( "<p>Danni </p>" ); 
+//     //next();
+// });
 
 app.get('/scrape', function(req,res){
     var url = 'http://www.imsdb.com/scripts/Clerks.html';
