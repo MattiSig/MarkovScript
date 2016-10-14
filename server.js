@@ -4,21 +4,23 @@ var request = require('request');
 var cheerio = require('cheerio');
 var app     = express();
 var Markov = require("./markovChain.js");
+var wrapText = require("./utils.js")
 
 //define prefix for different units
 var CHARACTER_PREFIX = "\t\t\t\t";
 var LINE_PREFIX = "\n\n\t\t";
 
 
-// app.get('/', function(req, res, next){
-//     res.sendFile(__dirname + '/index.html');
-//     next();
-// });
+app.get('/', function(req, res, next){
+    console.log('sending html');
+    res.sendFile('index.html', {root: __dirname});
+    //next();
+});
 
 // app.use(function(req, res, next) {                      //404 response handler
-//     console.log("danni kann ekki .append")
+//     console.log("sup sup res: " + res);
 //     //$( "div" ).append( "<p>Danni </p>" ); 
-//     //next();
+//     next();
 // });
 
 app.get('/scrape', function(req,res){
@@ -74,7 +76,7 @@ app.get('/scrape', function(req,res){
                             lines = lines.replace(/\\.\\.\\.|\\.\\.\\.\\./g," ... ");
                             lines = lines.replace(/  |   /g," ");
 
-                            json.lines = json.lines + lines + "# ";
+                            json.lines = json.lines + lines + " # ";
                             running = false;
                         }
 
@@ -99,7 +101,7 @@ app.get('/scrape', function(req,res){
                         if(temp2 == "\n\n"){
                             var sceene = data.slice(i+3,j);
                             var fixedSceene = sceene.replace(/\n\t/g,' ');
-                            json.sceene = json.sceene + fixedSceene + "#";
+                            json.sceene = json.sceene + fixedSceene + " # ";
                             running = false;
                         }
 
@@ -112,15 +114,21 @@ app.get('/scrape', function(req,res){
             }
         }
 
-        script = "";
+        //--------- WRITE SCRIPT -------//
+        var script = "";
+
+        //opening stuff, write out "scene for now"
+        script += "\n\t" + "SCENE:" + "\n";
 
         //create scene
+        var sceene = wrapText(Markov(json.sceene), 55, "\n\t");;
+        script += '\t' + sceene;
 
         //create convo
         characters = json.character;
         for(var i = 0 ; i<10 ; i++){
             var character = characters[Math.floor(Math.random()*characters.length)];
-            var line = Markov(json.lines);
+            var line = wrapText(Markov(json.lines), 35, "\n\t\t");
 
             //add character says
             script += '\n\n' + CHARACTER_PREFIX + character;
@@ -129,17 +137,14 @@ app.get('/scrape', function(req,res){
             script += '\n\t\t' + line;
         }
 
+        //write script to script.txt and send to browser
         fs.writeFile('script.txt', script,function(err){
-            console.log('noice');
             res.sendFile('script.txt', {root: __dirname});
         })
 
-
         // Finally, we'll just write out our json fie to output.json
         fs.writeFile('output.json', JSON.stringify(json, null, 4), function(err){
-
             console.log('File successfully written! - Check your project directory for the output.json file');
-
         });
     });
 });

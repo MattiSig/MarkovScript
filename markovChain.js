@@ -36,6 +36,13 @@ function MarkovChain(stringToProcess){
 		if(firstChar === '('){
 			isInParanthesis = true
 			paranthesisString += string + ' ';
+
+			//if it is only one word in a paranthesis
+			if(lastChar === ')'){
+				processedStringArray.push(paranthesisString);
+				paranthesisString = '';
+				isInParanthesis = false;
+			}
 			continue;
 		}
 
@@ -105,11 +112,11 @@ function MarkovChain(stringToProcess){
 				run = false;
 				break;
 			}
-			console.log('sup:', nextWord);
 
 			markovSentence = markovSentence + nextWord
 		}else{
 
+			//SPECIAL CASE-dont add space after ...
 			if(currentWord === '...'){
 				markovSentence = markovSentence + nextWord;
 			}
