@@ -12,19 +12,18 @@ var CHARACTER_PREFIX = "\t\t\t\t";
 var LINE_PREFIX = "\n\n\t\t";
 
 //work in progress
-/*app.get('/', function(req, res, next){
+app.get('/', function(req, res, next){
     console.log('sending html');  
     res.sendFile(__dirname + '/index.html');
-    next();
 });
 
-app.use(function(req, res, next) {
-    console.log("danni kann ekki .append")
-    var $ = cheerio.load('<div>...</div>');
+// app.use(function(req, res, next) {
+//     console.log("danni kann ekki .append")
+//     var $ = cheerio.load('<div>...</div>');
 
-    $('div').append('<li class="plum">Plum</li>')
-    $.html();
-});*/
+//     $('div').append('<li class="plum">Plum</li>')
+//     $.html();
+// });
 
 app.get('/scrape', function(req,res){
     var url = 'http://www.imsdb.com/scripts/Clerks.html';
