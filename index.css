@@ -1,14 +1,24 @@
 h1 {
-	font-family: "Raleway", sans-serif;
-	font-color:white;
-	}
+	font-family: "Roboto", sans-serif;
+	font-size: 30pt;
+	font-weight: 500;
+	color:white;
+	text-align: center;
+}
 body, html {
 	height: 100%;
 	margin: 0;
 	padding: 0;
 }
+p {
+	font-family: 'Roboto', sans-serif;
+	font-size: 13pt;
+	font-weight: 300;
+	color:white;
+	text-align: center;
+}
 .main_div {
-	 background:linear-gradient(
+	background:linear-gradient(
                      rgba(20,20,20, .6), 
                      rgba(20,20,20, .6)),
                 url('https://i.ytimg.com/vi/Xmo50IWnlO8/maxresdefault.jpg') no-repeat center center fixed; 
@@ -19,6 +29,9 @@ body, html {
     min-height: 100%;
     background-position: center;
     background-size: cover;
+}
+.button_1 {
+
 }
 
 .w3-display-middle{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);-ms-transform:translate(-50%,-50%)}
