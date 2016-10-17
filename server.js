@@ -11,6 +11,9 @@ var wrapText = require("./utils.js")
 var CHARACTER_PREFIX = "\t\t\t\t";
 var LINE_PREFIX = "\n\n\t\t";
 
+//use css
+app.use(express.static(__dirname));
+
 //work in progress
 app.get('/', function(req, res, next){
     console.log('sending html');  
