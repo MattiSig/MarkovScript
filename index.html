@@ -4,18 +4,19 @@
 	<head>
 	  <meta charset="utf-8">
 
-	  <title>The HTML5 Herald</title>
-	  <meta name="description" content="The HTML5 Herald">
-	  <meta name="author" content="SitePoint">
+		<title>The HTML5 Herald</title>
+		<meta name="description" content="The HTML5 Herald">
+		<meta name="author" content="SitePoint">
 
-	  <link rel="stylesheet" href="http://localhost:8081/index.css">
+		<!-- CSS -->
+		<link rel="stylesheet" href="http://localhost:8081/index.css">
 
-	  <!-- hax font, roboto frá google  https://fonts.google.com/ -->
-	  <link href="https://fonts.googleapis.com/css?family=Roboto:300,500" rel="stylesheet">
+		<!-- hax font, roboto frá google  https://fonts.google.com/ -->
+		<link href="https://fonts.googleapis.com/css?family=Roboto:300,500" rel="stylesheet">
 
-	  <!--[if lt IE 9]>
-	    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
-	  <![endif]-->
+		<!--[if lt IE 9]>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+		<![endif]-->
 	</head>
 
 	<body class="main_div">
@@ -41,29 +42,31 @@
 		    };
 		    xmlHttp.open("GET", url, true); // true for asynchronous 
 		    xmlHttp.send(null);
+
+		    window.location.assign(url);
 		}
 
 		//hehe, fann unaðslegt rugl á codepen.io, virkar ekki :( -> http://codepen.io/ManBearPigg/pen/jrvPrm
-		function hoverShake(myElement, speed, deg) {
-		// On mouse enter rotate element on timed interval. For symmetric oscillation,
-		// speed of outer interval is 2x speed of inner timeout.
-		 $(myElement).mouseenter(function() {
-		   myInterval = setInterval(function() {
-		     $(myElement).css('transform', 'rotate('+deg+'deg)');
-		     myTimeout = setTimeout(function() {
-		       $(myElement).css('transform', 'rotate('+(360-deg)+'deg)');
-		     }, speed);
-		   }, speed * 2);
-		 });
-		 // On mouse exit terminate intervals.
-		 $(myElement).mouseleave(function() {
-		   clearInterval(myInterval);
-		   clearTimeout(myTimeout);
-		   $(myElement).css('transform', 'rotate(0deg)');
-		 });
-		}
+		// function hoverShake(myElement, speed, deg) {
+		// // On mouse enter rotate element on timed interval. For symmetric oscillation,
+		// // speed of outer interval is 2x speed of inner timeout.
+		//  $(myElement).mouseenter(function() {
+		//    myInterval = setInterval(function() {
+		//      $(myElement).css('transform', 'rotate('+deg+'deg)');
+		//      myTimeout = setTimeout(function() {
+		//        $(myElement).css('transform', 'rotate('+(360-deg)+'deg)');
+		//      }, speed);
+		//    }, speed * 2);
+		//  });
+		//  // On mouse exit terminate intervals.
+		//  $(myElement).mouseleave(function() {
+		//    clearInterval(myInterval);
+		//    clearTimeout(myTimeout);
+		//    $(myElement).css('transform', 'rotate(0deg)');
+		//  });
+		// }
 
-		hoverShake('.button_1', 100, 3);
+		// hoverShake('.button_1', 100, 3);
 
 	</script>
 

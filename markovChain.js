@@ -103,7 +103,6 @@ function MarkovChain(stringToProcess){
 		}
 
 		nextWord = options[Math.floor(Math.random()*options.length)];
-		console.log(nextWord);
 
 		//If we have a weirdChar we dont add a space before it
 		if(nextWord.match(weirdChar) && nextWord.length === 1){
@@ -124,7 +123,6 @@ function MarkovChain(stringToProcess){
 		}
 		currentWord = nextWord;
 	}
-	console.log('MarkovChain sentence is: ' + markovSentence);
 
 	return markovSentence;
 }
