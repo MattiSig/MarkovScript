@@ -19,16 +19,16 @@
 	</head>
 
 	<body class="main_div">
-		<div class="w3-display-middle">
-			<img src="https://fanart.tv/fanart/movies/2295/hdmovielogo/clerks-ii-51ef45c8d89b2.png" class="w3-animate-top"></img>
+		<div class="w3-display-middle aligncenter">
+			<img id="clerks-img" src="https://fanart.tv/fanart/movies/2295/hdmovielogo/clerks-ii-51ef45c8d89b2.png" class="w3-animate-top"></img>
 			<h1>HÍ - Tölvur og list - Handritsverkefni</h1>
-			<p class="explain_text">Næ í handrit að Clerks II frá imsdb.  Nota Markov-keðjur til að útbúa nýjar setningar, samtöl og senur.  Þannig bý ég til nýtt handrit sem virðist vera raunverulegt en er í raun bull...</p>	
-			<button class="button_1" onclick="myFunction()" type="button">Click Me!</button>
+			<p class="explain_text">Næ í handrit að Clerks II frá imsdb.  Nota Markov-keðjur til að útbúa nýjar setningar, samtöl og senur.  Þannig er búið til nýtt handrit sem virðist vera raunverulegt en er í raun bull...</p>	
+			<button class="button_1" onclick="myFunction()" type="button">BÚA TIL SENU</button>
 		</div>		
 	</body>
 
 	<script>
-		//localserver er root á routinu? eitthvað svoeiðis
+		//localserver er root á routinu? eitthvað svoleiðis
 		var host = 'http://localhost:8081';
 		function myFunction() {
 			var url = host + '/scrape'; //sækjum gögn á /scrape
@@ -42,6 +42,29 @@
 		    xmlHttp.open("GET", url, true); // true for asynchronous 
 		    xmlHttp.send(null);
 		}
+
+		//hehe, fann unaðslegt rugl á codepen.io, virkar ekki :( -> http://codepen.io/ManBearPigg/pen/jrvPrm
+		function hoverShake(myElement, speed, deg) {
+		// On mouse enter rotate element on timed interval. For symmetric oscillation,
+		// speed of outer interval is 2x speed of inner timeout.
+		 $(myElement).mouseenter(function() {
+		   myInterval = setInterval(function() {
+		     $(myElement).css('transform', 'rotate('+deg+'deg)');
+		     myTimeout = setTimeout(function() {
+		       $(myElement).css('transform', 'rotate('+(360-deg)+'deg)');
+		     }, speed);
+		   }, speed * 2);
+		 });
+		 // On mouse exit terminate intervals.
+		 $(myElement).mouseleave(function() {
+		   clearInterval(myInterval);
+		   clearTimeout(myTimeout);
+		   $(myElement).css('transform', 'rotate(0deg)');
+		 });
+		}
+
+		hoverShake('.button_1', 100, 3);
+
 	</script>
 
 </html>

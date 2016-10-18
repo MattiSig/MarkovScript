@@ -1,3 +1,5 @@
+@import "compass/css3";
+
 h1 {
 	font-family: "Roboto", sans-serif;
 	font-size: 30pt;
@@ -31,9 +33,26 @@ p {
     background-size: cover;
 }
 .button_1 {
-
+	background-color: #FF1E31; /* red from C in clerks image */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+}
+.button_1:hover {
+	background: #FF9A10;
+	color: #0222A5;
 }
 
+#clerks-img {
+	display: inline-block
+}
+.aligncenter{text-align:center;}
 .w3-display-middle{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);-ms-transform:translate(-50%,-50%)}
 .w3-animate-top{position:relative;-webkit-animation:animatetop 0.4s;animation:animatetop 0.4s}
 @-webkit-keyframes animatetop{from{top:-300px;opacity:0} to{top:0;opacity:1}}
