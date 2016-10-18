@@ -5,11 +5,15 @@ var cheerio = require('cheerio');
 var app     = express();
 var Markov = require("./markovChain.js");
 var wrapText = require("./utils.js")
+var path = require('path');
 
 
 //define prefix for different units
 var CHARACTER_PREFIX = "\t\t\t\t";
 var LINE_PREFIX = "\n\n\t\t";
+
+//use css
+app.use(express.static(__dirname));
 
 //work in progress
 app.get('/', function(req, res, next){
@@ -139,15 +143,24 @@ app.get('/scrape', function(req,res){
             script += '\n\t\t' + line;
         }
 
-        //write script to script.txt and send to browser
-        fs.writeFile('script.txt', script,function(err){
-            res.sendFile('script.txt', {root: __dirname});
-        })
-
         // Finally, we'll just write out our json fie to output.json
         fs.writeFile('output.json', JSON.stringify(json, null, 4), function(err){
             console.log('File successfully written! - Check your project directory for the output.json file');
         });
+
+        //write script to script.txt and send to browser
+        fs.writeFile('script.txt', script,function(err){
+            var file = __dirname + '/script.txt';
+
+            var filename = path.basename(file);
+            var mimetype = 'application/x-please-download-me';
+
+            res.setHeader('Content-disposition', 'attachment; filename=' + filename);
+            res.setHeader('Content-type', mimetype);
+
+            var filestream = fs.createReadStream(file);
+            filestream.pipe(res);
+        })
     });
 });
 

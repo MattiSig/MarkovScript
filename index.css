@@ -1,0 +1,58 @@
+
+h1 {
+	font-family: "Roboto", sans-serif;
+	font-size: 30pt;
+	font-weight: 500;
+	color:white;
+	text-align: center;
+}
+body, html {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+p {
+	font-family: 'Roboto', sans-serif;
+	font-size: 13pt;
+	font-weight: 300;
+	color:white;
+	text-align: center;
+}
+.main_div {
+	background:linear-gradient(
+                     rgba(20,20,20, .6), 
+                     rgba(20,20,20, .6)),
+                url('https://i.ytimg.com/vi/Xmo50IWnlO8/maxresdefault.jpg') no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+    min-height: 100%;
+    background-position: center;
+    background-size: cover;
+}
+.button_1 {
+	background-color: #FF1E31; /* red from C in clerks image */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+}
+.button_1:hover {
+	background: #FF9A10;
+	color: #0222A5;
+}
+
+#clerks-img {
+	display: inline-block
+}
+.aligncenter{text-align:center;}
+.w3-display-middle{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);-ms-transform:translate(-50%,-50%)}
+.w3-animate-top{position:relative;-webkit-animation:animatetop 0.4s;animation:animatetop 0.4s}
+@-webkit-keyframes animatetop{from{top:-300px;opacity:0} to{top:0;opacity:1}}
+@keyframes animatetop{from{top:-300px;opacity:0} to{top:0;opacity:1}}
