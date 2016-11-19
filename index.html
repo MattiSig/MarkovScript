@@ -22,44 +22,48 @@
 	<body class="main_div">
 		<div class="w3-display-middle aligncenter">
 			<img id="clerks-img" src="https://fanart.tv/fanart/movies/2295/hdmovielogo/clerks-ii-51ef45c8d89b2.png" class="w3-animate-top"></img>
-			<h1>HÍ - TóNLiST: FEGURÐ, GERfiGREiND og GlUNdROðI</h1>
-			<p class="explain_text">Næ í handrit Clerks II frá imsdb.  Nota Markov-keðjur til að útbúa ný samtöl og senur. Þannig er búið til nýtt handrit sem virðist vera raunverulegt en er í raun gerfigreind tölvunnar að huxa upp nýtt handrit...</p>	
+			<h1>HÍ - TóNLiST: FEGURÐ, GERViGREiND og GlUNdROðI</h1>
+			<p class="explain_text">Nær í handrit Clerks II frá imsdb.  Notar Markov-keðjur til að útbúa ný samtöl og senur. Þannig er búið til nýtt handrit sem virðist raunverulegt en er í raun spunnið úr gervigreind tölvunnar ...</p>	
 			
-			<button class="button_1" onclick="myFunction()" type="button">BÚA TIL SENU</button>
+			<button class="button_1" id="zeButt" type="button">BÚA TIL SENU</button>
 			<div id="progressBar"><div></div></div>
-		</div>		
+			<div id="handrit"><p></p></div>
+		</div>
+
 	</body>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<script>
 		//localserver er root á routinu? eitthvað svoleiðis
 		var host = 'http://localhost:8081';
-		function myFunction() {
-			
-			progress(20, $('#progressBar'));
-			var url = host + '/scrape'; //sækjum gögn á /scrape
-			var xmlHttp = new XMLHttpRequest();
-		    xmlHttp.onreadystatechange = function() { 
-		    	//þetta er basiclly callbackið held ég
-		    	if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-		    		//hérna er hægt að vinna með response-ið, sem er script.txt
-		            console.log(xmlHttp.responseText);
-		    };
-		    xmlHttp.open("GET", url, true); // true for asynchronous 
-		    xmlHttp.send(null);
-		    progress(100, $('#progressBar'));
-		    window.location.assign(url);
-		}
+		var script;
+		var data;
+
+		$(document).ready(function(){
+    	$("#zeButt").click(function(){
+    		progress(20, $('#progressBar'));
+				$.ajax({
+					type: 'GET',
+  				//dataType: 'json',
+  				url: 'http://localhost:8081/scrape',
+  				//data: {script: ""},
+  				'success': function(response){
+  					progress(100, $('#progressBar'));
+  					console.log(response);
+  					$("#handrit").append("<p>" + response + "</p>");}
+					});
+
+				});
+    });
 
 		function progress(percent, $element) {
 	    var progressBarWidth = percent * $element.width() / 100;
 	    $element.find('div').animate({ width: progressBarWidth }, 4000);
 		}
 
-
-		//hehe, fann unaðslegt rugl á codepen.io, virkar ekki :( -> http://codepen.io/ManBearPigg/pen/jrvPrm
 		function hoverShake(myElement, speed, deg) {
 		// // On mouse enter rotate element on timed interval. For symmetric oscillation,
 		// // speed of outer interval is 2x speed of inner timeout.
+		var myTimeout;
 		$(myElement).mouseenter(function() {
 		  myInterval = setInterval(function() {
 		    $(myElement).css('transform', 'rotate('+deg+'deg)');

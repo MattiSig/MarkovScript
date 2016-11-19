@@ -7,10 +7,10 @@ var Markov = require("./markovChain.js");
 var wrapText = require("./utils.js")
 var path = require('path');
 
-
 //define prefix for different units
 var CHARACTER_PREFIX = "\t\t\t\t";
 var LINE_PREFIX = "\n\n\t\t";
+var script = "";
 
 //use css
 app.use(express.static(__dirname));
@@ -21,19 +21,12 @@ app.get('/', function(req, res, next){
     res.sendFile(__dirname + '/index.html');
 });
 
-// app.use(function(req, res, next) {
-//     console.log("danni kann ekki .append")
-//     var $ = cheerio.load('<div>...</div>');
-
-//     $('div').append('<li class="plum">Plum</li>')
-//     $.html();
-// });
-
 app.get('/scrape', function(req,res){
     var url = 'http://www.imsdb.com/scripts/Clerks.html';
     var sentance;
     var json;
-
+    var tekst = fs.readFileSync('textaskra/texti.txt', 'UTF-8');
+    console.log(tekst);
     request(url, function(error, response, html){
         if(!error){
             var $ = cheerio.load(html);
@@ -62,8 +55,6 @@ app.get('/scrape', function(req,res){
             .end()  //again go back to selected element
             .text());
             
-            console.log(data.length);
-
             for(var i=0; i < data.length-1; i++){
                 var temp = data.slice(i,i+4);
                 var next = data.slice(i+4,i+5);
@@ -124,11 +115,12 @@ app.get('/scrape', function(req,res){
         var script = "";
 
         //opening stuff, write out "scene for now"
-        script += "\n\t" + "SCENE:" + "\n";
+        script += "<br/>" + "SCENE:" + "\n";
 
         //create scene
         var sceene = wrapText(Markov(json.sceene), 55, "\n\t");;
         script += '\t' + sceene;
+        //console.log(script);
 
         //create convo
         characters = json.character;
@@ -137,14 +129,19 @@ app.get('/scrape', function(req,res){
             var line = wrapText(Markov(json.lines), 35, "\n\t\t");
 
             //add character says
-            script += '\n\n' + CHARACTER_PREFIX + character;
+            script += '<br/><br/><b>' + character + '</b>';
 
             //add line that character says
-            script += '\n\t\t' + line;
+            script += '<br/>' + line;
         }
-
+        var jsonScript = [{script: ""}];
+        jsonScript.script = script;
+        console.log(jsonScript.script);
+        
+        res.send(jsonScript.script);
+        //þarf ekki lengur að gera .txt og .json srkár
         // Finally, we'll just write out our json fie to output.json
-        fs.writeFile('output.json', JSON.stringify(json, null, 4), function(err){
+        /*fs.writeFile('output.json', JSON.stringify(json, null, 4), function(err){
             console.log('File successfully written! - Check your project directory for the output.json file');
         });
 
@@ -160,7 +157,7 @@ app.get('/scrape', function(req,res){
 
             var filestream = fs.createReadStream(file);
             filestream.pipe(res);
-        })
+        })*/
     });
 });
 
