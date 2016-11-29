@@ -17,6 +17,8 @@ p {
 	font-weight: 300;
 	color: WHITE;
 	text-align: center;
+	width: 50%;
+	margin-left: 25%;
 }
 .main_div {
 	background:linear-gradient(
@@ -32,16 +34,30 @@ p {
     background-size: cover;
 }
 .button_1 {
-	background-color: #FF1E31; /* red from C in clerks image */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
+ 	background: #cfdbe3;
+  background-image: -webkit-linear-gradient(top, #cfdbe3, #7d8387);
+  background-image: -moz-linear-gradient(top, #cfdbe3, #7d8387);
+  background-image: -ms-linear-gradient(top, #cfdbe3, #7d8387);
+  background-image: -o-linear-gradient(top, #cfdbe3, #7d8387);
+  background-image: linear-gradient(to bottom, #cfdbe3, #7d8387);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
 }
-
+/*.button_1:hover {
+  background: #9acded;
+  background-image: -webkit-linear-gradient(top, #9acded, #517f9e);
+  background-image: -moz-linear-gradient(top, #9acded, #517f9e);
+  background-image: -ms-linear-gradient(top, #9acded, #517f9e);
+  background-image: -o-linear-gradient(top, #9acded, #517f9e);
+  background-image: linear-gradient(to bottom, #9acded, #517f9e);
+  text-decoration: none;
+}*/
 #progressBar {
 	width: 400px;
   height: 22px;

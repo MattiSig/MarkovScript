@@ -171,7 +171,7 @@ app.get('/scrape', function(req,res){
 
         //create scene
         var sceene = wrapText(Markov(json.sceene), 55, "\n\t");;
-        script += '\t' + sceene;
+        script += '<I>' + sceene + '</I>';
         //console.log(script);
 
         //create convo
