@@ -22,7 +22,7 @@ p {
 	background:linear-gradient(
                      rgba(20,20,20, .6), 
                      rgba(20,20,20, .6)),
-                url('https://i.ytimg.com/vi/Xmo50IWnlO8/maxresdefault.jpg') no-repeat center center fixed; 
+                url('http://birdsallinteractive.com/wp-content/uploads/2015/10/main_hero_white_brick_background.jpg') no-repeat center center fixed; 
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -74,5 +74,5 @@ p {
 .aligncenter{text-align:center;}
 /*.w3-display-middle{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);-ms-transform:translate(-50%,-50%)}*/
 .w3-animate-top{position:relative;-webkit-animation:animatetop 0.4s;animation:animatetop 0.4s}
-@-webkit-keyframes animatetop{from{top:-300px;opacity:0} to{top:0;opacity:1}}
-@keyframes animatetop{from{top:-300px;opacity:0} to{top:0;opacity:1}}
+/*@-webkit-keyframes animatetop{from{top:-300px;opacity:0} to{top:0;opacity:1}}
+@keyframes animatetop{from{top:-300px;opacity:0} to{top:0;opacity:1}}*/

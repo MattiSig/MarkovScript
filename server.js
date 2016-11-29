@@ -24,10 +24,14 @@ app.get('/', function(req, res, next){
 app.get('/scrape', function(req,res){
     var url = 'http://www.imsdb.com/scripts/Clerks.html';
     var sentance;
-    var json;
-    var tekst = fs.readFileSync('textaskra/texti.txt', 'UTF-8');
-    console.log(tekst);
-    request(url, function(error, response, html){
+    var json = { character : ["Bergur", "Jón Gunnar", "Hannes"], sceene : '', lines : ''};
+    var sceene = fs.readFileSync('textaskra/sceene.txt', 'UTF-8');
+    var lines = fs.readFileSync('textaskra/lines.txt', 'UTF-8');
+    json.sceene = sceene;
+    json.lines = lines;
+    console.log(json.lines);
+    console.log(typeof(lines));
+    /*request(url, function(error, response, html){
         if(!error){
             var $ = cheerio.load(html);
             var character, sceene, lines;
@@ -157,8 +161,37 @@ app.get('/scrape', function(req,res){
 
             var filestream = fs.createReadStream(file);
             filestream.pipe(res);
-        })*/
-    });
+        })
+    });*/
+//--------- WRITE SCRIPT -------//
+        var script = "";
+
+        //opening stuff, write out "scene for now"
+        script += "<br/>" + "SCENE:" + "\n";
+
+        //create scene
+        var sceene = wrapText(Markov(json.sceene), 55, "\n\t");;
+        script += '\t' + sceene;
+        //console.log(script);
+
+        //create convo
+        characters = json.character;
+        for(var i = 0 ; i<10 ; i++){
+            var character = characters[Math.floor(Math.random()*characters.length)];
+            var line = wrapText(Markov(json.lines), 35, "\n\t\t");
+
+            //add character says
+            script += '<br/><br/><b>' + character + '</b>';
+
+            //add line that character says
+            script += '<br/>' + line;
+        }
+        var jsonScript = [{script: ""}];
+        jsonScript.script = script;
+        console.log(jsonScript.script);
+        
+        res.send(jsonScript.script);
+
 });
 
 app.listen('8081');
