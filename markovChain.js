@@ -8,7 +8,7 @@ function MarkovChain(stringToProcess){
 	var paranthesisString = '';
 	var isInParanthesis = false;
 
-	console.log('processing strings...');
+	//console.log('processing strings...');
 
 	for(var i = 0; i<stringArray.length; i++){
 		//check if end of string is a weird char
@@ -86,7 +86,7 @@ function MarkovChain(stringToProcess){
 		}
 	}
 
-	console.log('creating markov chain...');
+	//console.log('creating markov chain...');
 
 	var currentWord = '';
 	var nextWord = '';

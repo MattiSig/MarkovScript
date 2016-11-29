@@ -14,10 +14,11 @@ var script = "";
 
 //use css
 app.use(express.static(__dirname));
-
+var visits = 0;
 //work in progress
 app.get('/', function(req, res, next){
-    console.log('sending html');  
+    visits++;
+    console.log('visits : ' + visits);  
     res.sendFile(__dirname + '/index.html');
 });
 var clicked = 0
@@ -30,7 +31,7 @@ app.get('/scrape', function(req,res){
     json.sceene = sceene;
     json.lines = lines;
     clicked++;
-    console.log(clicked);
+    console.log("clicked : " + clicked);
     /*request(url, function(error, response, html){
         if(!error){
             var $ = cheerio.load(html);
@@ -188,7 +189,6 @@ app.get('/scrape', function(req,res){
         }
         var jsonScript = [{script: ""}];
         jsonScript.script = script;
-        console.log(jsonScript.script);
         
         res.send(jsonScript.script);
 
