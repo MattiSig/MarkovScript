@@ -20,7 +20,7 @@ app.get('/', function(req, res, next){
     console.log('sending html');  
     res.sendFile(__dirname + '/index.html');
 });
-
+var clicked = 0
 app.get('/scrape', function(req,res){
     var url = 'http://www.imsdb.com/scripts/Clerks.html';
     var sentance;
@@ -29,8 +29,8 @@ app.get('/scrape', function(req,res){
     var lines = fs.readFileSync('textaskra/lines.txt', 'UTF-8');
     json.sceene = sceene;
     json.lines = lines;
-    console.log(json.lines);
-    console.log(typeof(lines));
+    clicked++;
+    console.log(clicked);
     /*request(url, function(error, response, html){
         if(!error){
             var $ = cheerio.load(html);
@@ -167,7 +167,7 @@ app.get('/scrape', function(req,res){
         var script = "";
 
         //opening stuff, write out "scene for now"
-        script += "<br/>" + "SCENE:" + "\n";
+        script += "<br/>" + "\n";
 
         //create scene
         var sceene = wrapText(Markov(json.sceene), 55, "\n\t");;
