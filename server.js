@@ -178,6 +178,10 @@ app.get('/scrape', function(req,res){
         //create convo
         characters = json.character;
         for(var i = 0 ; i<10 ; i++){
+        if((Math.random()*100) > 70){
+            var sceene = wrapText(Markov(json.sceene), 55, "\n\t");;
+            script += '<br/><br/><I>' + sceene + '</I>';
+        }else{
             var character = characters[Math.floor(Math.random()*characters.length)];
             var line = wrapText(Markov(json.lines), 35, "\n\t\t");
 
@@ -185,7 +189,7 @@ app.get('/scrape', function(req,res){
             script += '<br/><br/><b>' + character + '</b>';
 
             //add line that character says
-            script += '<br/>' + line;
+            script += '<br/>' + line};
         }
         var jsonScript = [{script: ""}];
         jsonScript.script = script;

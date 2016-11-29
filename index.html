@@ -44,7 +44,8 @@
 				$.ajax({
 					type: 'GET',
   				//dataType: 'json',
-  				url: 'http://159.203.166.1:8081/scrape',
+  				url: '/scrape',
+  						 //'http://159.203.166.1:8081/scrape'
   				//data: {script: ""},
   				'success': function(response){
   					progress(100, $('#progressBar'));
