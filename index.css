@@ -17,8 +17,8 @@ p {
 	font-weight: 300;
 	color: WHITE;
 	text-align: center;
-	width: 50%;
-	margin-left: 25%;
+	width: 60%;
+	margin-left: 20%;
 }
 .main_div {
 	background:linear-gradient(
@@ -84,7 +84,8 @@ p {
 }
 
 #clerks-img {
-	display: inline-block
+	display: inline-block;
+	height: 330px;
 }
 
 .aligncenter{text-align:center;}
