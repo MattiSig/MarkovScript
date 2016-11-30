@@ -194,7 +194,6 @@ app.get('/scrape', function(req,res){
         }
         var jsonScript = [{script: ""}];
         jsonScript.script = script;
-        console.log(typeof(characters[Math.floor(Math.random()*characters.length)]));
         res.send(jsonScript.script);
 
 });
