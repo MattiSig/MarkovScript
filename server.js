@@ -25,7 +25,7 @@ var clicked = 0
 app.get('/scrape', function(req,res){
     var url = 'http://www.imsdb.com/scripts/Clerks.html';
     var sentance;
-    var json = { character : ["Bergur", "Jón Gunnar", "Hannes"], sceene : '', lines : ''};
+    var json = { character : ["Bergur", "Jón Gunnar", "Hannes", "Björn", "Finnur"], sceene : '', lines : ''};
     var sceene = fs.readFileSync('textaskra/sceene.txt', 'UTF-8');
     var lines = fs.readFileSync('textaskra/lines.txt', 'UTF-8');
     json.sceene = sceene;
@@ -177,14 +177,15 @@ app.get('/scrape', function(req,res){
 
         //create convo
         characters = json.character;
-        for(var i = 0 ; i<10 ; i++){
+        for(var i = 0 ; i<15 ; i++){
         if((Math.random()*100) > 70){
-            var sceene = wrapText(Markov(json.sceene), 55, "\n\t");;
+            var sceene = Markov(json.sceene);
+            sceene = sceene.replace(/<name>/g, characters[Math.floor(Math.random()*characters.length)]);
             script += '<br/><br/><I>' + sceene + '</I>';
         }else{
             var character = characters[Math.floor(Math.random()*characters.length)];
-            var line = wrapText(Markov(json.lines), 35, "\n\t\t");
-
+            var line = Markov(json.lines);
+            line = line.replace(/<name>/g, characters[Math.floor(Math.random()*characters.length)]);
             //add character says
             script += '<br/><br/><b>' + character + '</b>';
 
@@ -193,7 +194,7 @@ app.get('/scrape', function(req,res){
         }
         var jsonScript = [{script: ""}];
         jsonScript.script = script;
-        
+        console.log(typeof(characters[Math.floor(Math.random()*characters.length)]));
         res.send(jsonScript.script);
 
 });
