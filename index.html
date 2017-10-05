@@ -37,28 +37,30 @@
 		var host = 'http://159.203.166.1:8081';
 		var script;
 		var data;
-
+		var counter = 0;
 		$(document).ready(function(){
-    	$("#zeButt").click(function(){
-    		progress(20, $('#progressBar'));
-				$.ajax({
+    		$("#zeButt").click(function(){
+	    		progress(20, $('#progressBar'));
+					$.ajax({
 					type: 'GET',
-  				//dataType: 'json',
-  				url: '/scrape',
-  						 //'http://159.203.166.1:8081/scrape'
-  				//data: {script: ""},
-  				'success': function(response){
-  					progress(100, $('#progressBar'));
-  					console.log(response);
-  					$("#handrit").append("<p>" + response + "</p>");
-  				}
+	  				//dataType: 'json',
+	  				url: '/scrape',
+	  				//'http://159.203.166.1:8081/scrape'
+	  				//data: {script: ""},
+	  				'success': function(response){
+	  					progress(100, $('#progressBar'));
+	  					console.log("fresh out of the printer");
+	  					$("#handrit").append("<p id=\"res" + counter + "\">" + response + "</p>");
+	  					$("html,#res" + counter).animate({ scrollTop:$('#res' + counter).prop("scrollHeight")}, "slow");
+
+	  				}
 				});
 			});
-    });
+    	});
 
 		function progress(percent, $element) {
-	    var progressBarWidth = percent * $element.width() / 100;
-	    $element.find('div').animate({ width: progressBarWidth }, 4000);
+		    var progressBarWidth = percent * $element.width() / 100;
+		    $element.find('div').animate({ width: progressBarWidth }, 4000);
 		}
 
 		function hoverShake(myElement, speed, deg) {

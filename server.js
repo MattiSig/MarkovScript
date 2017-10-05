@@ -25,7 +25,7 @@ var clicked = 0
 app.get('/scrape', function(req,res){
     var url = 'http://www.imsdb.com/scripts/Clerks.html';
     var sentance;
-    var json = { character : ["Bergur", "Jón Gunnar", "Hannes", "Björn", "Finnur"], sceene : '', lines : ''};
+    var json = { character : ["Karen", "Jón Gunnar", "Hannes", "Björn", "Silja"], sceene : '', lines : ''};
     var sceene = fs.readFileSync('textaskra/sceene.txt', 'UTF-8');
     var lines = fs.readFileSync('textaskra/lines.txt', 'UTF-8');
     json.sceene = sceene;
@@ -198,6 +198,6 @@ app.get('/scrape', function(req,res){
 
 });
 
-app.listen('8081');
-console.log('Magic happens on port 8081');
+app.listen('8282');
+console.log('Magic happens on port 8282');
 exports = module.exports = app;
