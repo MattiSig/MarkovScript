@@ -21,15 +21,22 @@ app.get('/', function(req, res, next){
     console.log('visits : ' + visits);  
     res.sendFile(__dirname + '/index.html');
 });
-var clicked = 0
+
+var url = 'http://www.imsdb.com/scripts/Clerks.html';
+var sentance;
+var json = { character : ["Karen", "Jón Gunnar", "Hannes", "Björn", "Silja"], sceene : '', lines : ''};
+var sceene = fs.readFileSync('textaskra/sceene.txt', 'UTF-8');
+var lines = fs.readFileSync('textaskra/lines.txt', 'UTF-8');
+json.sceene = sceene;
+json.lines = lines;
+
+Markov.init(json.sceene, 'sceene');
+Markov.init(json.lines, 'lines');
+
+
+var clicked = 0;
 app.get('/scrape', function(req,res){
-    var url = 'http://www.imsdb.com/scripts/Clerks.html';
-    var sentance;
-    var json = { character : ["Karen", "Jón Gunnar", "Hannes", "Björn", "Silja"], sceene : '', lines : ''};
-    var sceene = fs.readFileSync('textaskra/sceene.txt', 'UTF-8');
-    var lines = fs.readFileSync('textaskra/lines.txt', 'UTF-8');
-    json.sceene = sceene;
-    json.lines = lines;
+    
     clicked++;
     console.log("clicked : " + clicked);
     /*request(url, function(error, response, html){
@@ -169,9 +176,9 @@ app.get('/scrape', function(req,res){
 
         //opening stuff, write out "scene for now"
         script += "<br/>" + "\n";
-
+        console.log("her" +Markov.markovDictionary);
         //create scene
-        var sceene = wrapText(Markov(json.sceene), 55, "\n\t");;
+        var sceene = Markov.createChain('sceene');
         script += '<I>' + sceene + '</I>';
         //console.log(script);
 
@@ -179,12 +186,12 @@ app.get('/scrape', function(req,res){
         characters = json.character;
         for(var i = 0 ; i<15 ; i++){
         if((Math.random()*100) > 70){
-            var sceene = Markov(json.sceene);
+            var sceene = Markov.createChain('sceene');
             sceene = sceene.replace(/<name>/g, characters[Math.floor(Math.random()*characters.length)]);
             script += '<br/><br/><I>' + sceene + '</I>';
         }else{
             var character = characters[Math.floor(Math.random()*characters.length)];
-            var line = Markov(json.lines);
+            var line = Markov.createChain('lines');
             line = line.replace(/<name>/g, characters[Math.floor(Math.random()*characters.length)]);
             //add character says
             script += '<br/><br/><b>' + character + '</b>';
@@ -195,7 +202,6 @@ app.get('/scrape', function(req,res){
         var jsonScript = [{script: ""}];
         jsonScript.script = script;
         res.send(jsonScript.script);
-
 });
 
 app.listen('8282');

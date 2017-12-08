@@ -9,6 +9,8 @@
     "express": "latest",
     "nodemon": "^1.11.0",
     "request": "latest",
-    "jquery": "latest"
+    "jquery": "latest",
+    "fs": "latest",
+    
   }
 }
