@@ -14,11 +14,9 @@ var script = "";
 
 //use css
 app.use(express.static(__dirname));
-var visits = 0;
-//work in progress
+
+//send out html page
 app.get('/', function(req, res, next){
-    visits++;
-    console.log('visits : ' + visits);  
     res.sendFile(__dirname + '/index.html');
 });
 
@@ -33,10 +31,13 @@ json.lines = lines;
 Markov.init(json.sceene, 'sceene');
 Markov.init(json.lines, 'lines');
 
+function pad2(n) { return n < 10 ? '0' + n : n };
 
 var clicked = 0;
 app.get('/scrape', function(req,res){
     
+    var date = new Date();
+    console.log('d:' + date.getFullYear().toString() +'-'+ pad2(date.getMonth() + 1) +'-'+ pad2( date.getDate()) +' t:'+ pad2( date.getHours() ) +':'+ pad2( date.getMinutes() ));
     clicked++;
     console.log("clicked : " + clicked);
     /*request(url, function(error, response, html){
@@ -176,7 +177,7 @@ app.get('/scrape', function(req,res){
 
         //opening stuff, write out "scene for now"
         script += "<br/>" + "\n";
-        console.log("her" +Markov.markovDictionary);
+
         //create scene
         var sceene = Markov.createChain('sceene');
         script += '<I>' + sceene + '</I>';

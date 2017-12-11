@@ -89,10 +89,9 @@ var MarkovChain = {
 			}
 		}
 		processedStringArray = [];
-	},	
+	},
 
 	createChain: function (lineOrSceene){
-		console.log('creating sentance..');
 		
 		var currentWord = '';
 		var nextWord = '';
